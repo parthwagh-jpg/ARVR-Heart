@@ -1,0 +1,72 @@
+[
+  {
+    "slice": 1,
+    "tumorPosition": { "x": 0.15, "y": 0.06, "z": 0.09 },
+    "tumorSize": 0.045,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  },
+  {
+    "slice": 2,
+    "tumorPosition": { "x": 0.17, "y": 0.08, "z": 0.10 },
+    "tumorSize": 0.052,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  },
+  {
+    "slice": 3,
+    "tumorPosition": { "x": 0.19, "y": 0.10, "z": 0.11 },
+    "tumorSize": 0.061,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  },
+  {
+    "slice": 4,
+    "tumorPosition": { "x": 0.21, "y": 0.11, "z": 0.12 },
+    "tumorSize": 0.068,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  },
+  {
+    "slice": 5,
+    "tumorPosition": { "x": 0.22, "y": 0.12, "z": 0.13 },
+    "tumorSize": 0.070,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  },
+  {
+    "slice": 6,
+    "tumorPosition": { "x": 0.21, "y": 0.11, "z": 0.12 },
+    "tumorSize": 0.065,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  },
+  {
+    "slice": 7,
+    "tumorPosition": { "x": 0.19, "y": 0.10, "z": 0.11 },
+    "tumorSize": 0.058,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  },
+  {
+    "slice": 8,
+    "tumorPosition": { "x": 0.17, "y": 0.08, "z": 0.10 },
+    "tumorSize": 0.050,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  },
+  {
+    "slice": 9,
+    "tumorPosition": { "x": 0.15, "y": 0.07, "z": 0.09 },
+    "tumorSize": 0.043,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  },
+  {
+    "slice": 10,
+    "tumorPosition": { "x": 0.13, "y": 0.05, "z": 0.08 },
+    "tumorSize": 0.038,
+    "tumorType": "Glioblastoma",
+    "severity": "High"
+  }
+]
