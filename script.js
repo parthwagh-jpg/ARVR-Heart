@@ -55,8 +55,61 @@ scene.add(reticle);
 const loader = new GLTFLoader();
 const loadingScreen = document.getElementById('loadingScreen');
 
-loader.load('models/heart.glb', (gltf) => {
+loader.load('models/heart2.glb', (gltf) => {
   model = gltf.scene;
+  // immediately after you set `model = gltf.scene;`
+/* Renderer tweaks (put these once at app init as well) */
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.physicallyCorrectLights = true;
+
+/* Traverse all meshes and fix material / texture encodings and flags */
+model.traverse((node) => {
+  if (!node.isMesh) return;
+
+  // ensure the geometry can receive vertex colors if present
+  if (node.geometry && node.geometry.attributes && node.geometry.attributes.color) {
+    // many GLBs use vertex colors — enable them on the material
+    if (Array.isArray(node.material)) {
+      node.material.forEach(m => { if (m) m.vertexColors = true; });
+    } else if (node.material) {
+      node.material.vertexColors = true;
+    }
+  }
+
+  // handle material array or single material consistently
+  const mats = Array.isArray(node.material) ? node.material : [node.material];
+  mats.forEach((mat) => {
+    if (!mat) return;
+    // if material uses a texture, make sure it's interpreted as sRGB (correct color space)
+    if (mat.map) mat.map.encoding = THREE.sRGBEncoding;
+    if (mat.emissiveMap) mat.emissiveMap.encoding = THREE.sRGBEncoding;
+    if (mat.aoMap) mat.aoMap.encoding = THREE.sRGBEncoding;
+    // ensure material reacts to the lights
+    if (typeof mat.metalness === 'undefined') mat.metalness = 0.1;
+    if (typeof mat.roughness === 'undefined') mat.roughness = 1.0;
+    mat.needsUpdate = true;
+    // if you want double sided (fixes some shading issues/incorrect normals), enable:
+    // mat.side = THREE.DoubleSide;
+  });
+
+  // optionally recompute normals if shading is odd:
+  if (node.geometry && !node.geometry.attributes.normal) {
+    node.geometry.computeVertexNormals();
+  }
+});
+
+/* Optional debug: list materials to console so you can inspect them */
+console.log('GLTF materials:', (() => {
+  const m = new Set();
+  model.traverse(n => { if (n.isMesh) {
+    if (Array.isArray(n.material)) n.material.forEach(x => m.add(x));
+    else m.add(n.material);
+  }});
+  return [...m];
+})());
+
   const box = new THREE.Box3().setFromObject(model);
   const center = box.getCenter(new THREE.Vector3());
   const size = box.getSize(new THREE.Vector3());
